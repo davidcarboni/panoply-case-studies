@@ -122,7 +122,7 @@
             cookie_user = Cookies.get("email")
             jwt_user = response.email
             if (jwt_user && jwt_user == cookie_user) {
-              $("#home").text(Cookies.get("email"))
+              $("#home").text(Cookies.get("name"))
             } else {
               window.location.href = "/sign-in"
             }
