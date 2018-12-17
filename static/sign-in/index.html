@@ -44,10 +44,10 @@
       </div>
 
       <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-      <label for="email" class="sr-only">Email address</label>
-      <input type="email" id="email" class="form-control" placeholder="Email address" required="" autofocus="">
-      <label for="eassword" class="sr-only">Password</label>
-      <!-- <input type="password" id="eassword" class="form-control" placeholder="Password" required=""> -->
+      <label for="name" class="sr-only">Your name</label>
+      <input type="text" id="name" class="form-control" placeholder="Your name" required="" autofocus="">
+      <label for="email" class="sr-only">Your email address</label>
+      <input type="email" id="email" class="form-control" placeholder="Your email address" required="">
       <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
     </form>
   
@@ -68,15 +68,18 @@
           url: functions_url + "/authenticate",
           type: "POST",
           data: JSON.stringify({
+            name: $("#name").val(),
             email: $("#email").val()
           }),
           contentType:"application/json; charset=utf-8",
           dataType:"text"
+
         }).done(function(data){
           response = JSON.parse(data)
           Cookies.set("jwt", response.jwt)
+          Cookies.set("name", $("#name").val())
           Cookies.set("email", $("#email").val())
-          console.log(Cookies.get("jwt")) 
+          window.location.href = "/"
           
         }).fail(function(jqXHR, textStatus){
           alert("It seems there's a problem: " + textStatus);
@@ -84,10 +87,22 @@
       }
 
       $(document).ready(function(){
+        
         $('#sign-in').submit(function (event) {
           authenticate();
           event.preventDefault();
-        });
+        })
+
+        name = Cookies.get("name")
+        if (name) {
+          $("#name").val(name)
+        }
+
+        email = Cookies.get("email")
+        if (email) {
+          $("#email").val(email)
+        }
+
       });
     
     </script>

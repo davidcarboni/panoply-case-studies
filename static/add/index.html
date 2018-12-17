@@ -37,7 +37,7 @@
   <body>
 
     <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
-      <a class="navbar-brand" href="#">Top navbar</a>
+      <a class="navbar-brand" href="/" id="home">Panoply</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -107,7 +107,7 @@
 
         // If there's no jwt, presumably we're not logged in:
         if (!jwt) {
-            window.location.href = "sign-in.html";
+          window.location.href = "/sign-in"
         } 
         
         // If there's a jwt, verify it:
@@ -122,10 +122,9 @@
             cookie_user = Cookies.get("email")
             jwt_user = response.email
             if (jwt_user && jwt_user == cookie_user) {
-                // All clear
-                return true
+              $("#home").text(Cookies.get("email"))
             } else {
-                window.location.href = "sign-in.html"
+              window.location.href = "/sign-in"
             }
         }).fail(function(jqXHR, textStatus){
             alert("It seems there's a problem: " + textStatus);
