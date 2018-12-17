@@ -71,22 +71,59 @@
       </div>
       <div>
         <form>
-            <div class="form-group">
-              <label for="name">Document name</label>
-              <input type="text" class="form-control" id="name" aria-describedby="nameHelp" placeholder="e.g. pitch deck">
-              <small id="nameHelp" class="form-text text-muted">A name to identify this document in the collection for the case study.</small>
+          <div class="form-group">
+              <label for="owner">Owner</label>
+              <input type="text" class="form-control" id="owner" aria-describedby="ownerHelp" placeholder="Owning company">
+              <small id="ownerHelp" class="form-text text-muted">Which group company owns this case study?.</small>
             </div>
             <div class="form-group">
-              <label for="description">Description</label>
-              <textarea class="form-control" id="description" aria-describedby="descriptionHelp" placeholder="Optional additional description">
-              </textarea>
-              <small id="descriptionHelp" class="form-text text-muted">Optional additional description.</small>
+              <label for="client">Client</label>
+              <input type="text" class="form-control" id="client" aria-describedby="clientHelp" placeholder="The client">
+              <small id="clientHelp" class="form-text text-muted">Which client was the work done for?.</small>
             </div>
             <div class="form-group">
-              <label for="file">File to upload</label>
-              <input type="file" class="form-control-file" id="file">
+              <label for="title">Title</label>
+              <input type="text" class="form-control" id="title" aria-describedby="titleHelp" placeholder="The title of the case study">
+              <small id="titleHelp" class="form-text text-muted">The title of the case study.</small>
             </div>
-            <button type="submit" class="btn btn-primary">Upload</button>
+            <div class="form-group">
+              <label for="sector">Sector</label>
+              <input type="text" class="form-control" id="sector" aria-describedby="sectorHelp" placeholder="Client's sector">
+              <small id="sectorHelp" class="form-text text-muted">The sector the work was done in.</small>
+            </div>
+            <div class="form-group">
+              <label for="keywords">Keywords</label>
+              <input type="text" class="form-control" id="keywords" aria-describedby="keywordsHelp" placeholder="Case study keywords">
+              <small id="keywordsHelp" class="form-text text-muted">Keywords for this case study.</small>
+            </div>
+            <div class="form-group">
+              <label for="value">Value</label>
+              <input type="text" class="form-control" id="value" aria-describedby="valueHelp" placeholder="Contract value">
+              <small id="valueHelp" class="form-text text-muted">Contract value of the work done.</small>
+            </div>
+            <div class="form-group">
+              <label for="start">Start</label>
+              <input type="text" class="form-control" id="start" aria-describedby="startHelp" placeholder="Start date">
+              <small id="startHelp" class="form-text text-muted">Start date of the work.</small>
+            </div>
+            <div class="form-group">
+              <label for="end">End</label>
+              <input type="text" class="form-control" id="end" aria-describedby="endHelp" placeholder="End date">
+              <small id="endHelp" class="form-text text-muted">End date of the work.</small>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="poc" id="poc">
+              <label class="form-check-label" for="poc">
+                Is this an internal proof-of-concept?
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="public" id="public">
+              <label class="form-check-label" for="public">
+                Is this work public?
+              </label>
+            </div>
+            <button type="submit" class="btn btn-primary">Create case study</button>
           </form>
       </div>
     </main>
