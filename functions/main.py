@@ -48,7 +48,7 @@ app = Flask(__name__)
 @app.route('/authenticate', methods = ['POST', 'GET', 'OPTIONS'])
 def r_authenticate():
    if request.method == 'OPTIONS':
-      return cors("")
+      return cors({})
    else:
       return authenticate(request)
 
@@ -56,7 +56,7 @@ def r_authenticate():
 @app.route('/authenticated', methods = ['POST', 'GET', 'OPTIONS'])
 def r_authenticated():
    if request.method == 'OPTIONS':
-      return cors("")
+      return cors({})
    else:
       return authenticated(request)
 
