@@ -19,8 +19,8 @@ declare -a functions=("authenticate" "authenticated")
 options="--region=europe-west1 --runtime=python37 --source=gs://panoply-case-studies/functions.zip --memory=128MB --trigger-http"
 for function in "${functions[@]}"
 do
-   echo Deploying function: "$i"
-   gcloud functions deploy $i --entry-point=$i ${options}
+   echo Deploying function: "$function"
+   gcloud functions deploy $function --entry-point=$function ${options}
 done
 
 # gcloud functions deploy authenticate   ${region} ${options} --entry-point=authenticate
