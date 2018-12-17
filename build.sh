@@ -8,7 +8,7 @@ cd functions && zip -r functions.zip . && mv functions.zip $base/static/
 cd $base
 
 # Update bucket
-gsutil -m cp -r static/* gs://panoply-case-studies
+gsutil -m cp -r static/* gs://casestudies.noducksgiven.com
 rm static/functions.zip
 
 # Deploy functions
@@ -16,7 +16,7 @@ rm static/functions.zip
 declare -a functions=("authenticate" "authenticated")
 
 ## Deploy the list of functions
-options="--region=europe-west1 --runtime=python37 --source=gs://panoply-case-studies/functions.zip --memory=128MB --trigger-http"
+options="--region=europe-west1 --runtime=python37 --source=gs://casestudies.noducksgiven.com/functions.zip --memory=128MB --trigger-http"
 for function in "${functions[@]}"
 do
    echo Deploying function: "$function"
