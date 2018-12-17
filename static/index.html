@@ -67,9 +67,9 @@ var functions_url = "https://europe-west1-panoply-case-studies.cloudfunctions.ne
                     cookie_user = Cookies.get("email")
                     jwt_user = response.email
                     if (jwt_user && jwt_user == cookie_user) {
-                        window.location.href = "search.html"
+                        window.location.href = "/search"
                     } else {
-                        window.location.href = "sign-in.html"
+                        window.location.href = "/sign-in"
                     }
                 }).fail(function(jqXHR, textStatus){
                     alert("It seems there's a problem: " + textStatus);
