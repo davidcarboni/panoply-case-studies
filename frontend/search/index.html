@@ -88,7 +88,7 @@
     <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
     <script>
 
-      var functions_url = "https://europe-west1-panoply-case-studies.cloudfunctions.net"
+      var functions_url = "https://europe-west1-tpx.cloudfunctions.net"
       //functions_url = "http://localhost:5000"
       
       // Check we're logged in:
@@ -97,7 +97,7 @@
 
         // If there's no jwt, presumably we're not logged in:
         if (!jwt) {
-          window.location.href = "/sign-in"
+          window.location.href = "../sign-in/index.html"
         } 
         
         // If there's a jwt, verify it:

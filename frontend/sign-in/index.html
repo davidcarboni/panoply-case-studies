@@ -58,7 +58,7 @@
     <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
     <script>
 
-      var functions_url = "https://europe-west1-panoply-case-studies.cloudfunctions.net"
+      var functions_url = "https://europe-west1-tpx.cloudfunctions.net"
     
       function authenticate() {
         
@@ -79,7 +79,7 @@
           Cookies.set("jwt", response.jwt)
           Cookies.set("name", $("#name").val())
           Cookies.set("email", $("#email").val())
-          window.location.href = "/"
+          window.location.href = "../index.html"
           
         }).fail(function(jqXHR, textStatus){
           alert("It seems there's a problem: " + textStatus);
