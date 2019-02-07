@@ -25,6 +25,6 @@ declare -a buckets=(
 for bucket in "${buckets[@]}"
 do
    echo Bucket: $bucket
-   gsutil mb -p $PROJECT -c $storage_class -l $location gs://${bucket}/
+   gsutil ls -b gs://${bucket} || gsutil mb -p $PROJECT -c $storage_class -l $location gs://${bucket}/
 done
 

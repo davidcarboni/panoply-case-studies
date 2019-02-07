@@ -20,8 +20,8 @@ gsutil -m cp -z html -a public-read -r frontend/* gs://${PROJECT}-frontend
 gcloud functions deploy hello --entry-point Hi --runtime go111 --trigger-http --source=./functions --region=europe-west1
 
 # gcloud functions deploy [FUNCTION_NAME] \
---source https://source.developers.google.com/projects/[PROJECT_ID]/repos/[REPOSITORY_ID]/moveable-aliases/master/paths/[SOURCE] \
---trigger-http;
+#--source https://source.developers.google.com/projects/[PROJECT_ID]/repos/[REPOSITORY_ID]/moveable-aliases/master/paths/[SOURCE] \
+#--trigger-http;
 
 exit 0
 
