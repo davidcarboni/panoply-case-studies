@@ -12,6 +12,10 @@ else
 fi
 
 
+# Update frontend
+gsutil -m cp -z html -a public-read -r frontend/* gs://${PROJECT}-frontend
+
+
 # Deploy function
 gcloud functions deploy hello --entry-point Hi --runtime go111 --trigger-http --source=./functions --region=europe-west1
 
