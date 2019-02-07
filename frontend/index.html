@@ -44,7 +44,7 @@
         </div>
         <script>
 
-var functions_url = "https://europe-west1-panoply-case-studies.cloudfunctions.net"
+var functions_url = "https://europe-west1-tpx-case-studies.cloudfunctions.net"
 //functions_url = "http://localhost:5000"
           
             $(function(){
@@ -52,7 +52,7 @@ var functions_url = "https://europe-west1-panoply-case-studies.cloudfunctions.ne
 
                 // If there's no jwt, presumably we're not logged in:
                 if (!jwt) {
-                    window.location.href = "/sign-in";
+                    window.location.href = "sign-in.html";
                 } 
                 
                 // If there's a jwt, verify it:
