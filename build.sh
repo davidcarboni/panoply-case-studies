@@ -17,7 +17,7 @@ gsutil -m cp -z html -a public-read -r frontend/* gs://${PROJECT}-frontend
 
 
 # Deploy function
-gcloud functions deploy hello --entry-point Hi --runtime go111 --trigger-http --source=./functions/go --region=europe-west1
+gcloud functions deploy hello --entry-point Hi --runtime go111 --trigger-http --source=./functions/go --region=europe-west1 --update-env-vars PROJECT_ID=${PROJECT}
 
 exit 0
 
