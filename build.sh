@@ -19,10 +19,6 @@ gsutil -m cp -z html -a public-read -r frontend/* gs://${PROJECT}-frontend
 # Deploy function
 gcloud functions deploy hello --entry-point Hi --runtime go111 --trigger-http --source=./functions/go --region=europe-west1
 
-# gcloud functions deploy [FUNCTION_NAME] \
-#--source https://source.developers.google.com/projects/[PROJECT_ID]/repos/[REPOSITORY_ID]/moveable-aliases/master/paths/[SOURCE] \
-#--trigger-http;
-
 exit 0
 
 # The functions we want
@@ -36,3 +32,6 @@ do
    gcloud functions deploy $function --region=europe-west1 --runtime=python37 --source=gs://${PROJECT}-functions/functions.zip --memory=128MB --trigger-event=google.storage.object.finalize --trigger-resource=${PROJECT}-content --entry-point=$function
 done
 
+# gcloud functions deploy [FUNCTION_NAME] \
+#--source https://source.developers.google.com/projects/[PROJECT_ID]/repos/[REPOSITORY_ID]/moveable-aliases/master/paths/[SOURCE] \
+#--trigger-http;
