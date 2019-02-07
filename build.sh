@@ -1,27 +1,34 @@
 #!/usr/bin/env bash
 
-gcloud config set project panoply-case-studies
-base=$PWD
 
-# Update functions
-cd functions && zip -r functions.zip . && mv functions.zip $base/static/
-cd $base
+# Prepare
 
-# Update bucket
-gsutil -m cp -r static/* gs://casestudies.noducksgiven.com
-rm static/functions.zip
+if [ ! -f ./project.txt ]; then
+    echo "Please create a file called project.txt containing your GCP project ID."
+    exit 1
+else
+    BASE=$PWD
+    PROJECT=`cat project.txt`
+fi
 
-# Deploy functions
-# TODO: deploy from a source repo?
-declare -a functions=("authenticate" "authenticated")
 
-## Deploy the list of functions
-options="--region=europe-west1 --runtime=python37 --source=gs://casestudies.noducksgiven.com/functions.zip --memory=128MB --trigger-http"
+# Deploy function
+gcloud functions deploy hello --entry-point Hi --runtime go111 --trigger-http --source=./functions --region=europe-west1
+
+# gcloud functions deploy [FUNCTION_NAME] \
+--source https://source.developers.google.com/projects/[PROJECT_ID]/repos/[REPOSITORY_ID]/moveable-aliases/master/paths/[SOURCE] \
+--trigger-http;
+
+exit 0
+
+# The functions we want
+declare -a functions=(
+  "authenticate"
+  "authenticated"
+)
+
 for function in "${functions[@]}"
 do
-   echo Deploying function: "$function"
-   gcloud functions deploy $function --entry-point=$function ${options}
+   gcloud functions deploy $function --region=europe-west1 --runtime=python37 --source=gs://${PROJECT}-functions/functions.zip --memory=128MB --trigger-event=google.storage.object.finalize --trigger-resource=${PROJECT}-content --entry-point=$function
 done
 
-# gcloud functions deploy authenticate   ${region} ${options} --entry-point=authenticate
-# gcloud functions deploy authenticated  ${region} ${options} --entry-point=authenticated
