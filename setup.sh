@@ -28,3 +28,6 @@ do
    gsutil ls -b gs://${bucket} || gsutil mb -p $PROJECT -c $storage_class -l $location gs://${bucket}/
 done
 
+
+# Public buckets
+gsutil iam ch allUsers:objectViewer gs://${PROJECT}-frontend
