@@ -31,3 +31,4 @@ done
 
 # Public buckets
 gsutil iam ch allUsers:objectViewer gs://${PROJECT}-frontend
+gsutil web set -m index.html -e 404.html gs://${PROJECT}-frontend
