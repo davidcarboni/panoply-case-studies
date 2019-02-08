@@ -13,7 +13,7 @@ fi
 
 
 # Update frontend
-gsutil -m cp -z html -a public-read -r frontend/* gs://${PROJECT}-frontend
+gsutil -m rsync -a public-read -J -d -r frontend gs://${PROJECT}-frontend/
 
 
 # Deploy function
