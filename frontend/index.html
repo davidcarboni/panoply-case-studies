@@ -48,6 +48,12 @@ var functions_url = "https://europe-west1-tpx-case-studies.cloudfunctions.net"
 //functions_url = "http://localhost:5000"
           
             $(function(){
+
+                // Make sure we're on https:
+                if (location.protocol != 'https:') {
+                    console.log('https:' + window.location.href.substring(window.location.protocol.length))
+                }
+
                 jwt = Cookies.get("jwt")
 
                 // If there's no jwt, presumably we're not logged in:
