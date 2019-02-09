@@ -67,8 +67,6 @@ def authenticated(request):
 def create(email, name, password, client):
     if email:
 
-        client = datastore.Client(project_id())
-
         if read(email, client):
             return False
 
@@ -87,7 +85,7 @@ def create(email, name, password, client):
 
 
 def read(email, client):
-    q = client.query(Kind='User')
+    q = client.query(kind='User')
     q.add_filter('email', '=', email.lower().strip())
     q_iterator = q.fetch(limit=1)
     page = next(q_iterator.pages)
