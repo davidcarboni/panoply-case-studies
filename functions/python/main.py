@@ -18,7 +18,7 @@ def register(request):
     name = data.get('name')
     password = data.get('password')
 
-    if email:
+    if email and password:
         client = datastore.Client(project_id())
 
         # Check for an existing user
@@ -30,24 +30,22 @@ def register(request):
         print(f'Registered: {user}')
         result = read(email, client)
         print(f're-read: {result}')
-        token = jwt.encode({'name': result.name, 'email': result.email}, secret(), algorithm='HS256')
+        token = jwt.encode({'name': result['name'], 'email': result['email']}, secret(), algorithm='HS256')
         print('jwt: {token.decode()}')
         return cors({'jwt': token.decode()})
     else:
-        return "Please provide a value for 'email' (and optionally 'name' and 'password')", 400
+        return "Please provide a value for 'email', 'password' and optionally 'name'.", 400
 
 
 def authenticate(request):
-    data = request.json or {}
-    data.update(request.args)
-    data.update(request.form)
+    data = request.json or request.args
     email = data.get('email')
     password = data.get('password')
     if email and password:
         client = datastore.Client(project_id())
         user = read(email, client)
-        if user and check_password(user.get('password')):
-            token = jwt.encode({'email': email}, secret(), algorithm='HS256')
+        if user and check_password(password, user['password']):
+            token = jwt.encode({'name': user['name'], 'email': user['email']}, secret(), algorithm='HS256')
             return cors({'jwt': token.decode()})
     return cors({})
 
@@ -57,7 +55,10 @@ def authenticated(request):
     data = request.json or request.args
     token = data.get("jwt")
     if token:
-        claims = jwt.decode(token.encode(), secret(), algorithms=['HS256'])
+        try:
+            claims = jwt.decode(token.encode(), secret(), algorithms=['HS256'])
+        except jwt.exceptions.InvalidSignatureError:
+            print(f"Invalid JWT signature on token: {token}")
     if claims:
         return cors(claims)
     else:
@@ -99,17 +100,22 @@ def read(email, client):
 
 def hash_password(password):
     # See https://github.com/pyca/bcrypt/
-    return bcrypt.hashpw(
-        base64.b64encode(hashlib.sha256(password.encode('utf-8')).digest()),
-        bcrypt.gensalt()
-    )
+    print(f'Password is: {password}')
+    if password:
+        return bcrypt.hashpw(
+            base64.b64encode(hashlib.sha256(password.encode('utf-8')).digest()),
+            bcrypt.gensalt()
+        )
+    return None
 
 
 def check_password(password, hash):
     # See https://github.com/pyca/bcrypt/
-    return bcrypt.checkpw(
-        base64.b64encode(hashlib.sha256(password.encode('utf-8')).digest()), hash
-    )
+    if password:
+        return bcrypt.checkpw(
+            base64.b64encode(hashlib.sha256(password.encode('utf-8')).digest()), hash
+        )
+    return False
 
 
 def cors(data):
