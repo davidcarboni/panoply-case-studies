@@ -51,7 +51,7 @@ var functions_url = "https://europe-west1-tpx-case-studies.cloudfunctions.net"
 
                 // Make sure we're on https:
                 if (location.protocol != 'https:') {
-                    console.log('https:' + window.location.href.substring(window.location.protocol.length))
+                    console.log('https://' + window.location.hostname)
                 }
 
                 jwt = Cookies.get("jwt")
